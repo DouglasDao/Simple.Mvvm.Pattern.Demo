@@ -21,7 +21,7 @@ public class LauncherActivity extends BaseActivity<ActivityLauncherBinding> impl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLauncherViewModel = new LauncherViewModel(this, this);
+        mLauncherViewModel = new LauncherViewModel(this, this, activityDataBinding);
         mLauncherViewModel.onCreateViewModel(getIntent().getExtras());
     }
 

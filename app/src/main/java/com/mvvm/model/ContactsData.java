@@ -3,10 +3,6 @@ package com.mvvm.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Dell on 04-03-2018.
- */
-
 public class ContactsData {
 
     @SerializedName("name")

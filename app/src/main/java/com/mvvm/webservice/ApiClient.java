@@ -8,13 +8,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Douglas on 14-02-2018.
- */
 
 public class ApiClient<T> {
-
-    //public static final String BASE_URL = "http://myhoodhandshake.com/api/"; //live
 
         private static final String BASE_URL = "https://api.androidhive.info/"; //dev
     private static Retrofit retrofit = null;

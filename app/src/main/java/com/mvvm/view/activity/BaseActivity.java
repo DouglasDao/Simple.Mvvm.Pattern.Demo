@@ -22,15 +22,12 @@ import com.mvvm.viewmodel.IViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Douglas on 02-02-2018.
- */
-
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity implements IView {
 
-    private CustomProgressbar mCustomProgressbar;
     public T activityDataBinding;
     protected View mParentView;
+    private CustomProgressbar mCustomProgressbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

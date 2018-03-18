@@ -9,10 +9,6 @@ import com.mvvm.com.R;
 import com.mvvm.model.ContactsData;
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by Dell on 16-03-2018.
- */
-
 public class ContactsViewModel extends BaseObservable {
 
     private Context mContext;
@@ -21,6 +17,14 @@ public class ContactsViewModel extends BaseObservable {
     public ContactsViewModel(Context mContext, ContactsData mContactsData) {
         this.mContext = mContext;
         this.mContactsData = mContactsData;
+    }
+
+    @BindingAdapter({"profilePic"})
+    public static void loadMyPic(AppCompatImageView view, String imageUrl) {
+        Picasso.with(view.getContext())
+                .load(imageUrl)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(view);
     }
 
     public void notifyContactsList(ContactsData data) {
@@ -39,14 +43,4 @@ public class ContactsViewModel extends BaseObservable {
     public String getProfilePic() {
         return mContactsData.getImage();
     }
-
-    @BindingAdapter({"profilePic"})
-    public static void loadMyPic(AppCompatImageView view, String imageUrl) {
-        Picasso.with(view.getContext())
-                .load(imageUrl)
-                .placeholder(R.mipmap.ic_launcher)
-                .into(view);
-    }
-
-
 }

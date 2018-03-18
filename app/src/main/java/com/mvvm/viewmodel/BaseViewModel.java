@@ -2,10 +2,6 @@ package com.mvvm.viewmodel;
 
 import com.mvvm.view.iview.IView;
 
-/**
- * Created by Dell on 12-03-2018.
- */
-
 public abstract class BaseViewModel implements IViewModel {
 
     private IViewModel iViewModel;

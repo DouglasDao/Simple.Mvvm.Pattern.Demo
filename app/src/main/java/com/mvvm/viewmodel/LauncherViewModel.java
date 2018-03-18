@@ -3,7 +3,9 @@ package com.mvvm.viewmodel;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
+import com.mvvm.com.databinding.ActivityLauncherBinding;
 import com.mvvm.model.ContactsData;
 import com.mvvm.view.iview.LauncherActivityView;
 import com.mvvm.webservice.ApiClient;
@@ -16,21 +18,20 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-/**
- * Created by Dell on 27-01-2018.
- */
-
 public class LauncherViewModel extends BaseViewModel {
 
     private Context mContext;
     private Subscription mSubscription;
+    private ActivityLauncherBinding activityDataBinding;
+
     private LauncherActivityView launcherActivityView;
     private List<ContactsData> mContactsList;
 
-    public LauncherViewModel(Context mContext, LauncherActivityView launcherActivityView) {
+    public LauncherViewModel(Context mContext, LauncherActivityView launcherActivityView, ActivityLauncherBinding activityDataBinding) {
         super(launcherActivityView);
         this.mContext = mContext;
         this.launcherActivityView = launcherActivityView;
+        this.activityDataBinding = activityDataBinding;
     }
 
     @Override
@@ -40,14 +41,19 @@ public class LauncherViewModel extends BaseViewModel {
 
     private void apiCallToGetContacts() {
         if (launcherActivityView.hasNetworkConnection()) {
-            launcherActivityView.showProgressbar();
+
+            //launcherActivityView.showProgressbar();
+            activityDataBinding.shimmerViewContainer.startShimmer();
+            activityDataBinding.shimmerViewContainer.setVisibility(View.VISIBLE);
             mSubscription = ApiClient.getClient().create(ApiInterface.class).performListContacts()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Subscriber<List<ContactsData>>() {
                         @Override
                         public void onCompleted() {
-                            launcherActivityView.dismissProgressbar();
+                            activityDataBinding.shimmerViewContainer.stopShimmer();
+                            activityDataBinding.shimmerViewContainer.setVisibility(View.GONE);
+                            //launcherActivityView.dismissProgressbar();
                             if (launcherActivityView != null) {
                                 launcherActivityView.contactsListSync(mContactsList);
                             }
@@ -55,12 +61,16 @@ public class LauncherViewModel extends BaseViewModel {
 
                         @Override
                         public void onError(Throwable e) {
-                            launcherActivityView.dismissProgressbar();
+                            //launcherActivityView.dismissProgressbar();
+                            activityDataBinding.shimmerViewContainer.stopShimmer();
+                            activityDataBinding.shimmerViewContainer.setVisibility(View.GONE);
                         }
 
                         @Override
                         public void onNext(List<ContactsData> contactsData) {
-                            launcherActivityView.dismissProgressbar();
+                            //launcherActivityView.dismissProgressbar();
+                            activityDataBinding.shimmerViewContainer.stopShimmer();
+                            activityDataBinding.shimmerViewContainer.setVisibility(View.GONE);
                             if (!contactsData.isEmpty()) {
                                 LauncherViewModel.this.mContactsList = contactsData;
                             }

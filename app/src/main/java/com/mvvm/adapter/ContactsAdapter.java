@@ -11,9 +11,6 @@ import com.mvvm.model.ContactsData;
 
 import java.util.List;
 
-/**
- * Created by Dell on 15-03-2018.
- */
 
 public class ContactsAdapter extends BaseRecyclerAdapter<ContactsData, ContactsViewHolder> {
 

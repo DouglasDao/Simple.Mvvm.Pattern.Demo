@@ -4,10 +4,6 @@ import com.mvvm.com.databinding.InflateContactsBinding;
 import com.mvvm.model.ContactsData;
 import com.mvvm.viewmodel.ContactsViewModel;
 
-/**
- * Created by Dell on 15-03-2018.
- */
-
 public class ContactsViewHolder extends BaseViewHolder<ContactsData, ContactsViewModel> {
 
     private InflateContactsBinding contactsBinding;
